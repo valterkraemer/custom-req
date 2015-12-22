@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Custom req</title>
+  <link rel="stylesheet" type="text/css" href="bower-components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body ng-app="app">
+
+  <nav class="navbar navbar-dark navbar-full bg-primary">
+    <div class="container">
+      <span class="navbar-brand" href="#">Custom Req</span>
+    </div>
+  </nav>
+
+  <div class="container" ng-controller="MainCtrl as vm">
+
+    <div class="row">
+
+      <div class="col-lg-12 col-xxl-6">
+
+        <div class="grid content-block">
+
+          <div class="cell-none">
+            <div class="radio" ng-repeat="user in vm.loggedInUsers track by $index">
+              <label>
+                <input type="radio" name="user" ng-model="vm.activeUser" ng-value="user"> {{user.user.name}}
+                <span class="btn btn-sm btn-warning" ng-click="vm.removeUser(user)">x</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="cell"></div>
+
+          <form class="form-inline cell-none">
+            <div class="input-group">
+              <input type="email" class="form-control" placeholder="Email" ng-model="vm.email">
+            </div>
+            <div class="form-group input-group">
+              <input type="password" class="form-control" placeholder="Password" ng-model="vm.password">
+            </div>
+            <button type="submit" class="btn btn btn-primary" ng-click="vm.signIn(vm.email, vm.password)">Add</button>
+          </form>
+
+
+        </div>
+
+        <div class="grid content-block">
+
+          <div class="cell padding-right">
+            <input type="text" class="form-control" id="url" placeholder="url" ng-model="vm.url">
+          </div>
+
+          <div class="btn-group cell-none" data-toggle="buttons">
+            <label class="btn btn-secondary" ng-class="{'active': vm.method === 'GET'}">
+              <input type="radio" name="method" value="GET" ng-model="vm.method"> GET
+            </label>
+            <label class="btn btn-secondary" ng-class="{'active': vm.method === 'POST'}">
+              <input type="radio" name="method" value="POST" ng-model="vm.method"> POST
+            </label>
+            <label class="btn btn-secondary" ng-class="{'active': vm.method === 'PUT'}">
+              <input type="radio" name="method" value="PUT" ng-model="vm.method"> PUT
+            </label>
+            <label class="btn btn-secondary" ng-class="{'active': vm.method === 'DELETE'}">
+              <input type="radio" name="method" value="DELETE" ng-model="vm.method"> DELETE
+            </label>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <div class="grid">
+            <div class="cell">Data</div>
+            <div class="btn btn-xs btn-link cell-none" ng-click="vm.reindent()">Reindent</div>
+          </div>
+          <textarea class="form-control" id="data" ng-model="vm.data"></textarea>
+        </div>
+
+        <div class="grid content-block">
+          <div class="cell">
+
+            <ul class="pagination" ng-if="vm.responses.length > 1">
+              <li class="page-item">
+                <button class="page-link" ng-click="vm.activeResponse = vm.activeResponse - 1" ng-disabled="vm.activeResponse === 0">
+                  <span>&laquo;</span>
+                </button>
+              </li>
+              <li class="page-item" ng-class="{'active': vm.activeResponse === $index, 'error': vm.responses[$index].error}" ng-repeat="response in vm.responses track by $index">
+                <a class="page-link" ng-click="vm.activeResponse = $index">{{$index + 1}}</a>
+              </li>
+              <li class="page-item">
+                <button class="page-link" ng-click="vm.activeResponse = vm.activeResponse + 1" ng-disabled="vm.activeResponse >= vm.responses.length - 1">
+                  <span>&raquo;</span>
+                </button>
+              </li>
+            </ul>
+
+          </div>
+
+          <div class="cell-none">
+            <div class="btn btn-primary send" ng-click="vm.send()">SEND</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-12 col-xxl-6">
+
+        <div class="form-group" ng-if="vm.responses.length">
+          <label>Response: ({{vm.responses[vm.activeResponse].status}}) - {{vm.responses[vm.activeResponse].timestamp | date:'H:mm:ss'}}
+          </label>
+          <pre class="card card-block" ng-bind="vm.responses[vm.activeResponse].data | json:2"></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="bower-components/angular/angular.js"></script>
+  <script src="Main.controller.js"></script>
+</body>
+
+</html>

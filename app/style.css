@@ -1,0 +1,104 @@
+.container {
+  padding-top: 20px;
+}
+
+label {
+  margin-bottom: 0;
+}
+
+textarea.form-control {
+  min-height: 100px;
+  font-size: 12px;
+}
+
+textarea:focus {
+  min-height: 200px;
+}
+
+.navbar .container {
+  padding-top: 0;
+}
+
+.send {
+  float: right;
+}
+
+.error a , .page-item.active.error a {
+  color: red;
+}
+
+.radio:last-child {
+  margin-bottom: 0;
+}
+
+.radio label {
+  width: 100%;
+}
+
+.radio label .btn {
+  float: right;
+  margin-left: 15px;
+}
+
+.padding-right {
+  padding-right: 15px;
+}
+
+.content-block {
+  margin-bottom: 15px;
+}
+
+.btn-xs {
+  padding: .1rem .5rem;
+  font-size: .7rem;
+  line-height: 1.5;
+  border-radius: .1rem;
+}
+
+.pagination {
+  margin: 0;
+  display: block;
+}
+
+.pagination .page-link {
+  padding: .375rem 0.75rem;
+}
+
+/* Media queries */
+
+@media (min-width: 1500px) {
+  .container {
+    max-width: 1470px;
+  }
+
+  .col-xxl-6 {
+    width: 50%;
+  }
+}
+
+/* Grid */
+
+[class^="grid"], [class*=" grid"] {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.cell, cell-auto {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  min-width: 0px;
+  min-height: 0px;
+}
+
+.cell-none {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  min-width: 0px;
+  min-height: 0px;
+}
